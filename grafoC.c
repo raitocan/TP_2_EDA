@@ -205,3 +205,15 @@ int removerVerticeGrafoC(GrafoC* grafo, int chaveA){
     return 1;
 }
 
+void removerTodasArestasC(GrafoC* grafo){
+    int chave = grafo->primeiro;
+    while(chave != -1 ){
+        int primeiro = grafo->listaVertices[chave]->primeiro;
+        while(grafo->listaVertices[chave]->ultimo != -1){
+
+            removerArestaGrafoC(grafo,grafo->listaVertices[chave]->chave,grafo->listaVertices[chave]->lista[primeiro]->chave);
+            primeiro = grafo->listaVertices[chave]->primeiro;
+        }
+        chave = grafo->listaIndicesProx[chave];
+    }
+}

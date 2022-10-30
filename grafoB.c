@@ -189,3 +189,17 @@ int removerVerticeGrafoB(GrafoB* grafo, int chaveA){
     grafo->livre = encontraProximoVazio(grafo->listaIndices,N);
     return 1;
 }
+
+
+void removerTodasArestasB(GrafoB* grafo){
+    int chave = grafo->primeiro;
+    while(chave != -1 ){
+        int primeiro = grafo->listaVertices[chave]->primeiro;
+        while(grafo->listaVertices[chave]->ultimo != -1){
+
+            removerArestaGrafoB(grafo,grafo->listaVertices[chave]->chave,grafo->listaVertices[chave]->lista[primeiro]->chave);
+            primeiro = grafo->listaVertices[chave]->primeiro;
+        }
+        chave = grafo->listaIndices[chave];
+    }
+}

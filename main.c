@@ -8,7 +8,7 @@
 
 
 int main() {
-    int qualTeste = 1;
+    int qualTeste = 2;
     if(qualTeste == 0) {
         GrafoA* grafo = iniciaGrafo(50);
         adicionarVertice(grafo);
@@ -24,6 +24,7 @@ int main() {
         //inserirAresta(grafo,1,2);
         removerTodasArestasA(grafo);
         imprimirGrafo(grafo);}
+
     if(qualTeste == 1){
         GrafoB* grafoB = inicializaGrafoB();
         adicionaVerticeGrafoB(grafoB,10);
@@ -40,9 +41,9 @@ int main() {
 
         //removerArestaGrafoB(grafoB,1,10);
         //removerArestaGrafoB(grafoB,1,10);
-        removerVerticeGrafoB(grafoB,1);
-        adicionaVerticeGrafoB(grafoB,2);
-
+        //removerVerticeGrafoB(grafoB,1);
+        //adicionaVerticeGrafoB(grafoB,2);
+        removerTodasArestasB(grafoB);
         imprimeGrafoB(grafoB);
 
     }
@@ -59,7 +60,8 @@ int main() {
         imprimeGrafoC(grafoC);
 
         //removerArestaGrafoC(grafoC,1,10);
-        removerVerticeGrafoC(grafoC,1);
+        //removerVerticeGrafoC(grafoC,1);
+        removerTodasArestasC(grafoC);
         imprimeGrafoC(grafoC);
     }
     if(qualTeste == 3){

@@ -35,6 +35,6 @@ int encontraProximoVazio(int* listaIndice, int tamanho);
 int removerArestaGrafoC(GrafoC* grafo, int chaveA, int chaveB);
 int removerArestaVerticeC(VerticeC* vertice, int aresta);
 int removerVerticeGrafoC(GrafoC* grafo, int chaveA);
-
+void removerTodasArestasC(GrafoC* grafo);
 
 #endif //TP_2_EDA_GRAFOC_H
