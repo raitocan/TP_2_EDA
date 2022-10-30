@@ -24,7 +24,7 @@ Vertice* iniciaVertice(int maxVizinhos, int chave){
 int adicionarVertice(GrafoA* grafo){
     if(grafo->numVertices == grafo->tamMax) return -1;
     grafo->listaVertices[grafo->numVertices] = iniciaVertice(N,grafo->numVertices);
-    printf("Inserido um vertice de indice %d\n",grafo->numVertices);
+    //printf("Inserido um vertice de indice %d\n",grafo->numVertices);
     grafo->numVertices++;
     return grafo->numVertices-1;
 }
@@ -43,7 +43,7 @@ int inserirAresta(GrafoA* grafo, int origem,int destino){
     grafo->listaVertices[origem]->listaAdjacencia[tamOrigem] = *grafo->listaVertices[destino];
     grafo->listaVertices[destino]->listaAdjacencia[tamDestino] = *grafo->listaVertices[origem];
 
-    printf("Inserido uma aresta entre %d e %d\n",origem,destino);
+    //printf("Inserido uma aresta entre %d e %d\n",origem,destino);
     grafo->listaVertices[origem]->tamanhoLista++;
     grafo->listaVertices[destino]->tamanhoLista++;
 
@@ -104,6 +104,17 @@ void imprimirGrafo(GrafoA* grafo){
         }
     }
     printf("\n");
+}
 
 
+
+void removerTodasArestasA(GrafoA* grafo){
+    int numRepeticoes = 0;
+    for(int i = 0; i<grafo->numVertices;i++){
+        numRepeticoes = grafo->listaVertices[i]->tamanhoLista;
+        for(int j = 0; j < numRepeticoes; j++){
+            printf("Removendo %d %d!\n",i,grafo->listaVertices[i]->listaAdjacencia[0].chave);
+            removerAresta(grafo,i,grafo->listaVertices[i]->listaAdjacencia[0].chave);
+        }
+    }
 }

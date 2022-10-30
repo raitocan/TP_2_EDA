@@ -39,4 +39,6 @@ void imprimeVerticeD(VerticeD* vertice);
 void removerArestaD(GrafoD* grafo,int chaveA,int chaveB);
 void removerVerticeD(GrafoD* grafo,int chaveA);
 
+void removerTodasArestasD(GrafoD* grafo);
+
 #endif //TP_2_EDA_GRAFOD_H

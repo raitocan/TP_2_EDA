@@ -97,8 +97,8 @@ void imprimeVerticeE(VerticeE* vertice){
 void removerArestaE(GrafoE* grafo,int chaveA,int chaveB){
     if(grafo->inicio == NULL) { return;}
     VerticeE *ponteiroA = grafo->inicio,*ponteiroB = grafo->inicio;
-    while (ponteiroA->chave != chaveA) ponteiroA = ponteiroA->proximo;
-    while (ponteiroB->chave != chaveB) ponteiroB = ponteiroB->proximo;
+    while (ponteiroA->chave != chaveA) {ponteiroA = ponteiroA->proximo;}
+    while (ponteiroB->chave != chaveB) {ponteiroB = ponteiroB->proximo;}
 
     ArestaE *antecessor = NULL,*percorrer = ponteiroA->arestaInicio;
 
@@ -106,8 +106,9 @@ void removerArestaE(GrafoE* grafo,int chaveA,int chaveB){
     if(antecessor == NULL){
         ponteiroA->arestaInicio = percorrer->proximo;
         ponteiroA->arestaProxima = percorrer->proximo;
-        if(ponteiroA->proximo == NULL) { ponteiroA->fim = NULL;}
-    } else if(ponteiroA->proximo == NULL){
+
+        if(percorrer->proximo == NULL) { ponteiroA->arestaFim = NULL;}
+    } else if(percorrer->proximo == NULL){
         ponteiroA->arestaFim = antecessor;
         antecessor->proximo = NULL;
     }
@@ -123,8 +124,8 @@ void removerArestaE(GrafoE* grafo,int chaveA,int chaveB){
     if(antecessor == NULL){
         ponteiroB->arestaInicio = percorrer->proximo;
         ponteiroB->arestaProxima = percorrer->proximo;
-        if (ponteiroB->proximo == NULL) { ponteiroB->fim = NULL;}
-    } else if(ponteiroA->proximo == NULL){
+        if (ponteiroB->proximo == NULL) { ponteiroB->arestaFim = NULL;}
+    } else if(percorrer->proximo == NULL){
             ponteiroB->arestaFim = antecessor;
             antecessor->proximo = NULL;
     }else {
@@ -152,4 +153,18 @@ void removerVerticeE(GrafoE* grafo,int chaveA){
 
     }
 
+}
+
+
+void removerTodasArestasE(GrafoE* grafo){
+    VerticeE* percorrer = grafo->proximo;
+    while(percorrer != NULL){
+        ArestaE* aresta = percorrer->arestaInicio;
+        while (aresta != NULL){
+            printf("Removendo %d %d!\n",aresta->chave,percorrer->chave);
+            removerArestaE(grafo,aresta->chave,percorrer->chave);
+            aresta = percorrer->arestaInicio;
+        }
+        percorrer = percorrer->proximo;
+    }
 }

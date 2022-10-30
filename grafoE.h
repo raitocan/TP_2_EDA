@@ -38,4 +38,7 @@ void imprimeVerticeE(VerticeE* vertice);
 
 void removerArestaE(GrafoE* grafo,int chaveA,int chaveB);
 void removerVerticeE(GrafoE* grafo,int chaveA);
+
+void removerTodasArestasE(GrafoE* grafo);
+
 #endif //TP_2_EDA_GRAFOE_H

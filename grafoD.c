@@ -139,3 +139,18 @@ void removerVerticeD(GrafoD* grafo,int chaveA){
     }
 
 }
+
+
+
+void removerTodasArestasD(GrafoD* grafo){
+    VerticeD* percorrer = grafo->proximo;
+    while(percorrer != NULL){
+        ArestaD* aresta = percorrer->arestaInicio;
+        while (aresta != NULL){
+            printf("Removendo %d %d!\n",aresta->chave,percorrer->chave);
+            removerArestaD(grafo,aresta->chave,percorrer->chave);
+            aresta = percorrer->arestaInicio;
+        }
+        percorrer = percorrer->proximo;
+    }
+}

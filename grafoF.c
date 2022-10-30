@@ -100,15 +100,16 @@ void imprimeVerticeF(VerticeF* vertice){
         percorrer = percorrer->proximo;
     }
     printf(" ]\n");
-
+/*
     printf("Anterior %d : [ ",vertice->chave);
+
     percorrer = vertice->arestaInicio;
     while(percorrer != NULL){
         if(percorrer->anterior != NULL){
         printf("%d ",percorrer->anterior->chave);}
         percorrer = percorrer->proximo;
     }
-    printf(" ]\n");
+    printf(" ]\n");*/
 }
 
 void removerArestaF(GrafoF* grafo,int chaveA,int chaveB){
@@ -125,7 +126,7 @@ void removerArestaF(GrafoF* grafo,int chaveA,int chaveB){
 
         if(percorrer->proximo == NULL) { ponteiroA->arestaFim = NULL;}
         else {percorrer->proximo->anterior =  NULL;}
-    } else if(ponteiroA->arestaProxima == NULL){
+    } else if(percorrer->proximo == NULL){
         ponteiroA->arestaFim = percorrer->anterior;
         percorrer->anterior->proximo = NULL;
     }
@@ -181,11 +182,10 @@ void removerTodasArestasF(GrafoF* grafo){
     while(percorrer != NULL){
         ArestaF* aresta = percorrer->arestaInicio;
         while (aresta != NULL){
-            //printf("Removendo %d %d!\n",aresta->chave,percorrer->chave);
+            printf("Removendo %d %d!\n",aresta->chave,percorrer->chave);
             removerArestaF(grafo,aresta->chave,percorrer->chave);
             aresta = percorrer->arestaInicio;
         }
         percorrer = percorrer->proximo;
     }
-
 }

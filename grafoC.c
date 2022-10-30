@@ -204,3 +204,4 @@ int removerVerticeGrafoC(GrafoC* grafo, int chaveA){
     grafo->livre = encontraProximoVazio(grafo->listaIndicesProx,N);
     return 1;
 }
+
