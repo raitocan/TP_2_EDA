@@ -1,9 +1,14 @@
 #include "grafoA.h"
 #include "grafoB.h"
 #include "grafoC.h"
+#include "grafoD.h"
+#include "grafoE.h"
+#include "grafoF.h"
+
+
 
 int main() {
-    int qualTeste = 2;
+    int qualTeste = 5;
     if(qualTeste == 0) {
         GrafoA* grafo = iniciaGrafo(50);
         adicionarVertice(grafo);
@@ -55,8 +60,60 @@ int main() {
         //removerArestaGrafoC(grafoC,1,10);
         removerVerticeGrafoC(grafoC,1);
         imprimeGrafoC(grafoC);
+    }
+    if(qualTeste == 3){
+        GrafoD*  grafoD = inicializaGrafoD();
+        adicionaVerticeGrafoD(grafoD,18);
+        adicionaVerticeGrafoD(grafoD,10);
+        adicionaVerticeGrafoD(grafoD,1);
 
+        adicionarArestaGrafoD(grafoD,1,10);
+        adicionarArestaGrafoD(grafoD,1,18);
+        adicionarArestaGrafoD(grafoD,10,18);
+        adicionarArestaGrafoD(grafoD,1,10);
 
+        imprimeGrafoD(grafoD);
+
+        //removerArestaD(grafoD,1,10);
+        removerVerticeD(grafoD,1);
+        imprimeGrafoD(grafoD);
+
+    }
+    if(qualTeste == 4){
+        GrafoE*  grafoE = inicializaGrafoE();
+        adicionaVerticeGrafoE(grafoE,18);
+        adicionaVerticeGrafoE(grafoE,10);
+        adicionaVerticeGrafoE(grafoE,1);
+
+        adicionarArestaGrafoE(grafoE,1,10);
+        adicionarArestaGrafoE(grafoE,1,18);
+        adicionarArestaGrafoE(grafoE,10,18);
+        adicionarArestaGrafoE(grafoE,1,10);
+
+        imprimeGrafoE(grafoE);
+
+        //removerArestaE(grafoE,1,10);
+        removerVerticeE(grafoE,1);
+        imprimeGrafoE(grafoE);
+
+    }
+    if(qualTeste == 5){
+        GrafoF* grafoF = inicializaGrafoF();
+        adicionaVerticeGrafoF(grafoF,18);
+        adicionaVerticeGrafoF(grafoF,10);
+        adicionaVerticeGrafoF(grafoF,1);
+
+        adicionarArestaGrafoF(grafoF,1,10);
+        adicionarArestaGrafoF(grafoF,1,18);
+        adicionarArestaGrafoF(grafoF,10,18);
+        adicionarArestaGrafoF(grafoF,1,10);
+
+        imprimeGrafoF(grafoF);
+
+        //removerArestaF(grafoF,1,10);
+        removerVerticeF(grafoF,1);
+        //removerTodasArestasF(grafo)
+        imprimeGrafoF(grafoF);
 
     }
 
