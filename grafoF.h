@@ -41,6 +41,6 @@ void removerArestaF(GrafoF* grafo,int chaveA,int chaveB);
 void removerVerticeF(GrafoF* grafo,int chaveA);
 
 void removerTodasArestasF(GrafoF* grafo);
-
+GrafoF* inicializaGrafoFArquivo(char *filename);
 
 #endif //TP_2_EDA_GRAFOF_H

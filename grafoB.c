@@ -203,3 +203,27 @@ void removerTodasArestasB(GrafoB* grafo){
         chave = grafo->listaIndices[chave];
     }
 }
+
+GrafoB* inicializaGrafoBArquivo(char *filename){
+    GrafoB* grafo = inicializaGrafoB();
+    for(int i = 0;i<50;i++){
+        adicionaVerticeGrafoB(grafo,i);
+    }
+    FILE *arquivo = fopen(filename,"r");
+    if(arquivo ){
+        int num,i = 0;
+        char check;
+        while (fscanf(arquivo, "%d%c", &num,&check)){
+            //printf("LEU UM VALOR %d %d %c\n",i,num,check);
+            adicionarArestaGrafoB(grafo,i,num);
+            if (check == '\n') {i++;}
+            if (feof(arquivo)) { break;}
+        }
+
+        imprimeGrafoB(grafo);
+        return grafo;
+    } else {
+        printf("Erro ao ler o arquivo! %s",filename);
+        return NULL;
+    }
+}

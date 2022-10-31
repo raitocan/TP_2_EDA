@@ -40,5 +40,6 @@ void removerArestaD(GrafoD* grafo,int chaveA,int chaveB);
 void removerVerticeD(GrafoD* grafo,int chaveA);
 
 void removerTodasArestasD(GrafoD* grafo);
+GrafoD* inicializaGrafoDArquivo(char *filename);
 
 #endif //TP_2_EDA_GRAFOD_H

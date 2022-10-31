@@ -41,4 +41,6 @@ void removerVerticeE(GrafoE* grafo,int chaveA);
 
 void removerTodasArestasE(GrafoE* grafo);
 
+GrafoE* inicializaGrafoEArquivo(char *filename);
+
 #endif //TP_2_EDA_GRAFOE_H

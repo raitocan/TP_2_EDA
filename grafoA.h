@@ -26,6 +26,8 @@ void imprimirGrafo(GrafoA* grafo);
 int removerAresta(GrafoA* grafo,int origem,int destino);
 void removerVertice(GrafoA* grafo, int vertice);
 void removerTodasArestasA(GrafoA* grafo);
+GrafoA* inicializaGrafoAArquivo(char *filename);
+
 
 
 #endif //TP_2_EDA_GRAFOA_H

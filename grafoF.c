@@ -189,3 +189,27 @@ void removerTodasArestasF(GrafoF* grafo){
         percorrer = percorrer->proximo;
     }
 }
+
+GrafoF* inicializaGrafoFArquivo(char *filename){
+    GrafoF* grafo = inicializaGrafoF();
+    for(int i = 0;i<50;i++){
+        adicionaVerticeGrafoF(grafo,i);
+    }
+    FILE *arquivo = fopen(filename,"r");
+    if(arquivo ){
+        int num,i = 0;
+        char check;
+        while (fscanf(arquivo, "%d%c", &num,&check)){
+            //printf("LEU UM VALOR %d %d %c\n",i,num,check);
+            adicionarArestaGrafoF(grafo,i,num);
+            if (check == '\n') {i++;}
+            if (feof(arquivo)) { break;}
+        }
+
+        imprimeGrafoF(grafo);
+        return grafo;
+    } else {
+        printf("Erro ao ler o arquivo! %s",filename);
+        return NULL;
+    }
+}

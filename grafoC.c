@@ -131,7 +131,6 @@ int removerArestaGrafoC(GrafoC* grafo, int chaveA, int chaveB){
     }
     if(indiceA == -1) { return -1;}
     if(indiceB == -1) { return -1;}
-
     removerArestaVerticeC(grafo->listaVertices[indiceB],chaveA);
     removerArestaVerticeC(grafo->listaVertices[indiceA],chaveB);
     return 1;
@@ -139,12 +138,15 @@ int removerArestaGrafoC(GrafoC* grafo, int chaveA, int chaveB){
 int removerArestaVerticeC(VerticeC* vertice, int aresta){
     int chave = vertice->primeiro;
     int antecessor = -1, indiceRemover = -1,sucessor = -1;
+    //imprimeVerticeC(vertice);
     while(chave != -1){
         if(vertice->lista[chave]->chave == aresta) {
             indiceRemover = chave;
             break;
         }
         chave = vertice->listaIndicesProx[chave];
+        //printf("PAROU AQUI! %d\n",chave);
+
     }
     antecessor = vertice->listaIndicesAnterior[indiceRemover];
     sucessor = vertice->listaIndicesProx[indiceRemover];
@@ -157,6 +159,8 @@ int removerArestaVerticeC(VerticeC* vertice, int aresta){
 
     if(sucessor != -1){
         vertice->listaIndicesAnterior[sucessor] = vertice->listaIndicesAnterior[indiceRemover];
+    } else {
+        vertice->listaIndicesProx[antecessor] = -1;
     }
 
     if(vertice->ultimo == indiceRemover) {
@@ -210,10 +214,35 @@ void removerTodasArestasC(GrafoC* grafo){
     while(chave != -1 ){
         int primeiro = grafo->listaVertices[chave]->primeiro;
         while(grafo->listaVertices[chave]->ultimo != -1){
-
+            printf("Removendo aresta %d %d\n",grafo->listaVertices[chave]->chave,grafo->listaVertices[chave]->lista[primeiro]->chave);
             removerArestaGrafoC(grafo,grafo->listaVertices[chave]->chave,grafo->listaVertices[chave]->lista[primeiro]->chave);
+            printf("Passou!\n");
             primeiro = grafo->listaVertices[chave]->primeiro;
         }
         chave = grafo->listaIndicesProx[chave];
+    }
+}
+
+GrafoC* inicializaGrafoCArquivo(char *filename){
+    GrafoC* grafo = inicializaGrafoC();
+    for(int i = 0;i<50;i++){
+        adicionaVerticeGrafoC(grafo,i);
+    }
+    FILE *arquivo = fopen(filename,"r");
+    if(arquivo ){
+        int num,i = 0;
+        char check;
+        while (fscanf(arquivo, "%d%c", &num,&check)){
+            //printf("LEU UM VALOR %d %d %c\n",i,num,check);
+            adicionarArestaGrafoC(grafo,i,num);
+            if (check == '\n') {i++;}
+            if (feof(arquivo)) { break;}
+        }
+
+        //imprimeGrafoC(grafo);
+        return grafo;
+    } else {
+        printf("Erro ao ler o arquivo! %s",filename);
+        return NULL;
     }
 }

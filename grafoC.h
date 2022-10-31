@@ -36,5 +36,7 @@ int removerArestaGrafoC(GrafoC* grafo, int chaveA, int chaveB);
 int removerArestaVerticeC(VerticeC* vertice, int aresta);
 int removerVerticeGrafoC(GrafoC* grafo, int chaveA);
 void removerTodasArestasC(GrafoC* grafo);
+GrafoC* inicializaGrafoCArquivo(char *filename);
+
 
 #endif //TP_2_EDA_GRAFOC_H
