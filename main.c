@@ -8,8 +8,8 @@
 
 
 int main() {
-    int qualTeste = 2,arquivo = 1;
-    if(qualTeste == 0) {
+    int qualTeste = 0,arquivo = 1,numOp = 0;
+    if(qualTeste == 0){
         if(arquivo == 0 ){
             GrafoA* grafo = iniciaGrafo(50);
             adicionarVertice(grafo);
@@ -27,11 +27,10 @@ int main() {
             imprimirGrafo(grafo);
         } else {
             GrafoA *grafoA = inicializaGrafoAArquivo("../graph.txt");
-            removerTodasArestasA(grafoA);
+            numOp += removerTodasArestasA(grafoA);
             imprimirGrafo(grafoA);
         }
     }
-
     if(qualTeste == 1){
         if(arquivo == 0 ){
             GrafoB* grafoB = inicializaGrafoB();
@@ -55,12 +54,12 @@ int main() {
             imprimeGrafoB(grafoB);
         } else {
             GrafoB *grafoB = inicializaGrafoBArquivo("../graph.txt");
-            removerTodasArestasB(grafoB);
+            numOp+= removerTodasArestasB(grafoB);
             imprimeGrafoB(grafoB);
         }
 
     }
-    if(qualTeste ==2){
+    if(qualTeste == 2){
         if(arquivo == 0 ){
             GrafoC* grafoC = inicializaGrafoC();
             adicionaVerticeGrafoC(grafoC,10);
@@ -80,7 +79,7 @@ int main() {
         } else {
             GrafoC *grafoC = inicializaGrafoCArquivo("../graph.txt");
             //removerArestaGrafoC(grafoC,41,43);
-            removerTodasArestasC(grafoC);
+            numOp+= removerTodasArestasC(grafoC);
             imprimeGrafoC(grafoC);
         }
     }
@@ -104,7 +103,7 @@ int main() {
             imprimeGrafoD(grafoD);
         } else {
             GrafoD *grafoD = inicializaGrafoDArquivo("../graph.txt");
-            removerTodasArestasD(grafoD);
+            numOp+= removerTodasArestasD(grafoD);
             imprimeGrafoD(grafoD);
     }
 
@@ -129,7 +128,7 @@ int main() {
             imprimeGrafoE(grafoE);
         } else {
             GrafoE *grafoE = inicializaGrafoEArquivo("../graph.txt");
-            removerTodasArestasE(grafoE);
+            numOp += removerTodasArestasE(grafoE);
             imprimeGrafoE(grafoE);
         }
     }
@@ -153,11 +152,11 @@ int main() {
             imprimeGrafoF(grafoF);
         } else {
             GrafoF *grafoF = inicializaGrafoFArquivo("../graph.txt");
-            removerTodasArestasF(grafoF);
+            numOp += removerTodasArestasF(grafoF);
             imprimeGrafoF(grafoF);
         }
 
     }
-
+    printf("Numero de operacoes basicas: %d\n",numOp);
     return 0;
 }

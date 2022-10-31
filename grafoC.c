@@ -122,24 +122,30 @@ int adicionarArestaGrafoC(GrafoC* grafo, int chaveA, int chaveB){
 }
 
 int removerArestaGrafoC(GrafoC* grafo, int chaveA, int chaveB){
-    int indiceA = -1,indiceB = -1;
+    int indiceA = -1,indiceB = -1, numOp = 0;
     int chave = grafo->primeiro;
     while(chave != -1){
+        numOp+= 2; // Pelo while e pelo if abaixo.
         if(grafo->listaVertices[chave]->chave == chaveA){ indiceA = chave;}
+        numOp++;
         if(grafo->listaVertices[chave]->chave == chaveB){ indiceB = chave;}
         chave = grafo->listaIndicesProx[chave];
     }
+    numOp++;
     if(indiceA == -1) { return -1;}
+    numOp++;
     if(indiceB == -1) { return -1;}
-    removerArestaVerticeC(grafo->listaVertices[indiceB],chaveA);
-    removerArestaVerticeC(grafo->listaVertices[indiceA],chaveB);
-    return 1;
+    numOp+= removerArestaVerticeC(grafo->listaVertices[indiceB],chaveA);
+    numOp+= removerArestaVerticeC(grafo->listaVertices[indiceA],chaveB);
+    return numOp;
 }
 int removerArestaVerticeC(VerticeC* vertice, int aresta){
+    int numOp = 0;
     int chave = vertice->primeiro;
     int antecessor = -1, indiceRemover = -1,sucessor = -1;
     //imprimeVerticeC(vertice);
     while(chave != -1){
+        numOp+=2;
         if(vertice->lista[chave]->chave == aresta) {
             indiceRemover = chave;
             break;
@@ -150,26 +156,26 @@ int removerArestaVerticeC(VerticeC* vertice, int aresta){
     }
     antecessor = vertice->listaIndicesAnterior[indiceRemover];
     sucessor = vertice->listaIndicesProx[indiceRemover];
-
+    numOp++;
     if(antecessor == -1){
         vertice->primeiro = vertice->listaIndicesProx[indiceRemover];
     } else {
         vertice->listaIndicesProx[antecessor] = vertice->listaIndicesProx[indiceRemover];
     }
-
+    numOp++;
     if(sucessor != -1){
         vertice->listaIndicesAnterior[sucessor] = vertice->listaIndicesAnterior[indiceRemover];
     } else {
         vertice->listaIndicesProx[antecessor] = -1;
     }
-
+    numOp++;
     if(vertice->ultimo == indiceRemover) {
         vertice->ultimo = antecessor;
     }
     vertice->lista[indiceRemover] = NULL;
     vertice->tamanho--;
     vertice->livre = encontraProximoVazio(vertice->listaIndicesProx,N);
-    return 1;
+    return numOp;
 }
 int removerVerticeGrafoC(GrafoC* grafo, int chaveA){
     int chave = grafo->primeiro;
@@ -209,17 +215,20 @@ int removerVerticeGrafoC(GrafoC* grafo, int chaveA){
     return 1;
 }
 
-void removerTodasArestasC(GrafoC* grafo){
-    int chave = grafo->primeiro;
+int removerTodasArestasC(GrafoC* grafo){
+    int chave = grafo->primeiro,numOp = 0;
     while(chave != -1 ){
+        numOp++;
         int primeiro = grafo->listaVertices[chave]->primeiro;
         while(grafo->listaVertices[chave]->ultimo != -1){
+            numOp++;
             printf("Removendo aresta %d %d\n",grafo->listaVertices[chave]->chave,grafo->listaVertices[chave]->lista[primeiro]->chave);
-            removerArestaGrafoC(grafo,grafo->listaVertices[chave]->chave,grafo->listaVertices[chave]->lista[primeiro]->chave);
+            numOp+= removerArestaGrafoC(grafo,grafo->listaVertices[chave]->chave,grafo->listaVertices[chave]->lista[primeiro]->chave);
             primeiro = grafo->listaVertices[chave]->primeiro;
         }
         chave = grafo->listaIndicesProx[chave];
     }
+    return numOp;
 }
 
 GrafoC* inicializaGrafoCArquivo(char *filename){

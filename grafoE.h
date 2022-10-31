@@ -36,10 +36,10 @@ void adicionarArestaGrafoE(GrafoE* grafo, int chaveA,int chaveB);
 void imprimeGrafoE(GrafoE* grafo);
 void imprimeVerticeE(VerticeE* vertice);
 
-void removerArestaE(GrafoE* grafo,int chaveA,int chaveB);
+int removerArestaE(GrafoE* grafo,int chaveA,int chaveB);
 void removerVerticeE(GrafoE* grafo,int chaveA);
 
-void removerTodasArestasE(GrafoE* grafo);
+int removerTodasArestasE(GrafoE* grafo);
 
 GrafoE* inicializaGrafoEArquivo(char *filename);
 

@@ -32,7 +32,7 @@ int encontraProximoVazio(int* listaIndice, int tamanho);
 int removerArestaGrafoB(GrafoB* grafo, int chaveA, int chaveB);
 int removerArestaVerticeB(VerticeB* vertice, int aresta);
 int removerVerticeGrafoB(GrafoB* grafo, int chaveA);
-void removerTodasArestasB(GrafoB* grafo);
+int removerTodasArestasB(GrafoB* grafo);
 GrafoB* inicializaGrafoBArquivo(char *filename);
 
 

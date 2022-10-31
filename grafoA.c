@@ -51,9 +51,12 @@ int inserirAresta(GrafoA* grafo, int origem,int destino){
 }
 
 int removerAresta(GrafoA* grafo,int origem,int destino){
+    int numOp = 0;
     for(int i = 0; i < grafo->listaVertices[origem]->tamanhoLista;i++){
+        numOp+=2;
         if(grafo->listaVertices[origem]->listaAdjacencia[i].chave == destino){
             for(int j = i;j < grafo->listaVertices[origem]->tamanhoLista-1;j++){
+                numOp++;
                 grafo->listaVertices[origem]->listaAdjacencia[j] = grafo->listaVertices[origem]->listaAdjacencia[j+1];
             }
             grafo->listaVertices[origem]->tamanhoLista--;
@@ -61,15 +64,17 @@ int removerAresta(GrafoA* grafo,int origem,int destino){
         }
     }
     for(int i = 0; i < grafo->listaVertices[destino]->tamanhoLista;i++){
+        numOp+=2;
         if(grafo->listaVertices[destino]->listaAdjacencia[i].chave == origem){
             for(int j = i;j < grafo->listaVertices[destino]->tamanhoLista-1;j++){
+                numOp++;
                 grafo->listaVertices[destino]->listaAdjacencia[j] = grafo->listaVertices[destino]->listaAdjacencia[j+1];
             }
             grafo->listaVertices[destino]->tamanhoLista--;
             break;
         }
     }
-    return 1;
+    return numOp;
 };
 
 void removerVertice(GrafoA* grafo, int vertice){
@@ -108,15 +113,19 @@ void imprimirGrafo(GrafoA* grafo){
 
 
 
-void removerTodasArestasA(GrafoA* grafo){
-    int numRepeticoes = 0;
+int removerTodasArestasA(GrafoA* grafo){
+    int numRepeticoes = 0,numOp = 0;
     for(int i = 0; i<grafo->numVertices;i++){
+        numOp++;
         numRepeticoes = grafo->listaVertices[i]->tamanhoLista;
         for(int j = 0; j < numRepeticoes; j++){
+            numOp++;
             printf("Removendo %d %d!\n",i,grafo->listaVertices[i]->listaAdjacencia[0].chave);
-            removerAresta(grafo,i,grafo->listaVertices[i]->listaAdjacencia[0].chave);
+            numOp+= removerAresta(grafo,i,grafo->listaVertices[i]->listaAdjacencia[0].chave);
         }
+        //printf("%d\n",numOp);
     }
+    return numOp;
 }
 
 GrafoA* inicializaGrafoAArquivo(char *filename){

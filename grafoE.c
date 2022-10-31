@@ -94,15 +94,18 @@ void imprimeVerticeE(VerticeE* vertice){
     printf(" ]\n");
 }
 
-void removerArestaE(GrafoE* grafo,int chaveA,int chaveB){
-    if(grafo->inicio == NULL) { return;}
+int removerArestaE(GrafoE* grafo,int chaveA,int chaveB){
+    int numOp = 0;
+    if(grafo->inicio == NULL) { return numOp;}
+    numOp++;
     VerticeE *ponteiroA = grafo->inicio,*ponteiroB = grafo->inicio;
-    while (ponteiroA->chave != chaveA) {ponteiroA = ponteiroA->proximo;}
-    while (ponteiroB->chave != chaveB) {ponteiroB = ponteiroB->proximo;}
+    while (ponteiroA->chave != chaveA) {ponteiroA = ponteiroA->proximo; numOp++;}
+    while (ponteiroB->chave != chaveB) {ponteiroB = ponteiroB->proximo;numOp++;}
 
     ArestaE *antecessor = NULL,*percorrer = ponteiroA->arestaInicio;
 
-    while(percorrer->chave != chaveB) {antecessor = percorrer; percorrer = percorrer->proximo;}
+    while(percorrer->chave != chaveB) {antecessor = percorrer; percorrer = percorrer->proximo;numOp++;}
+    numOp++;
     if(antecessor == NULL){
         ponteiroA->arestaInicio = percorrer->proximo;
         ponteiroA->arestaProxima = percorrer->proximo;
@@ -115,12 +118,12 @@ void removerArestaE(GrafoE* grafo,int chaveA,int chaveB){
     else {
         antecessor->proximo = percorrer->proximo;
     }
-
+    numOp++;
     percorrer = ponteiroB->arestaInicio;
     antecessor = NULL;
 
-    while(percorrer->chave != chaveA) {antecessor = percorrer; percorrer = percorrer->proximo;};
-
+    while(percorrer->chave != chaveA) {antecessor = percorrer; percorrer = percorrer->proximo;numOp++;};
+    numOp++;
     if(antecessor == NULL){
         ponteiroB->arestaInicio = percorrer->proximo;
         ponteiroB->arestaProxima = percorrer->proximo;
@@ -131,6 +134,8 @@ void removerArestaE(GrafoE* grafo,int chaveA,int chaveB){
     }else {
         antecessor->proximo = percorrer->proximo;
     }
+    numOp++;
+    return numOp;
 }
 
 void removerVerticeE(GrafoE* grafo,int chaveA){
@@ -156,17 +161,21 @@ void removerVerticeE(GrafoE* grafo,int chaveA){
 }
 
 
-void removerTodasArestasE(GrafoE* grafo){
+int removerTodasArestasE(GrafoE* grafo){
+    int numOp = 0;
     VerticeE* percorrer = grafo->proximo;
     while(percorrer != NULL){
+        numOp++;
         ArestaE* aresta = percorrer->arestaInicio;
         while (aresta != NULL){
+            numOp++;
             printf("Removendo %d %d!\n",aresta->chave,percorrer->chave);
-            removerArestaE(grafo,aresta->chave,percorrer->chave);
+            numOp+= removerArestaE(grafo,aresta->chave,percorrer->chave);
             aresta = percorrer->arestaInicio;
         }
         percorrer = percorrer->proximo;
     }
+    return numOp;
 }
 
 GrafoE* inicializaGrafoEArquivo(char *filename){
