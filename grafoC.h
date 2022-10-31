@@ -5,7 +5,7 @@
 #ifndef TP_2_EDA_GRAFOC_H
 #define TP_2_EDA_GRAFOC_H
 
-#define N 50
+#define N 100
 #define tamMax 100
 #include <stdio.h>
 #include <stdlib.h>

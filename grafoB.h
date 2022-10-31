@@ -4,7 +4,7 @@
 
 #ifndef TP_2_EDA_GRAFOB_H
 #define TP_2_EDA_GRAFOB_H
-#define N 50
+#define N 100
 #define tamMax 100
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,7 +27,7 @@ void imprimeGrafoB(GrafoB* grafo);
 void imprimeVerticeB(VerticeB* vertice);
 void adicionaVerticeGrafoB(GrafoB* grafo, int chave);
 int adicionarArestaGrafoB(GrafoB* grafo, int chaveA, int chaveB);
-void adicionarVerticeVerticeB(VerticeB* vertice,VerticeB* chave);
+void adicionarVerticeVerticeB(VerticeB* vertice,int chave);
 int encontraProximoVazio(int* listaIndice, int tamanho);
 int removerArestaGrafoB(GrafoB* grafo, int chaveA, int chaveB);
 int removerArestaVerticeB(VerticeB* vertice, int aresta);

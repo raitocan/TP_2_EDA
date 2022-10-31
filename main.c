@@ -8,7 +8,7 @@
 
 
 int main() {
-    int qualTeste = 1,arquivo = 1;
+    int qualTeste = 2,arquivo = 1;
     if(qualTeste == 0) {
         if(arquivo == 0 ){
             GrafoA* grafo = iniciaGrafo(50);
@@ -55,7 +55,7 @@ int main() {
             imprimeGrafoB(grafoB);
         } else {
             GrafoB *grafoB = inicializaGrafoBArquivo("../graph.txt");
-            //removerTodasArestasB(grafoB);
+            removerTodasArestasB(grafoB);
             imprimeGrafoB(grafoB);
         }
 
@@ -80,9 +80,8 @@ int main() {
         } else {
             GrafoC *grafoC = inicializaGrafoCArquivo("../graph.txt");
             //removerArestaGrafoC(grafoC,41,43);
-            // ESTÁ COM PROBLEMAS, DEBUGAR!
             removerTodasArestasC(grafoC);
-            //imprimeGrafoC(grafoC);
+            imprimeGrafoC(grafoC);
         }
     }
     if(qualTeste == 3){

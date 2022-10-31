@@ -73,7 +73,8 @@ int encontraProximoVazio(int* listaIndice, int tamanho){
         if(listaIndice[i] == -1){
             return i;
         }
-    } return -1;
+    }
+    return -1;
 }
 
 void adicionaVerticeGrafoB(GrafoB* grafo, int chave){
@@ -88,11 +89,11 @@ void adicionaVerticeGrafoB(GrafoB* grafo, int chave){
     grafo->livre = grafo->listaIndices[grafo->livre];
 }
 
-void adicionarVerticeVerticeB(VerticeB* vertice,VerticeB* chave){
+void adicionarVerticeVerticeB(VerticeB* vertice,int chave){
     if(vertice->primeiro == -1){
         vertice->primeiro = vertice->livre;
     }
-    vertice->lista[vertice->livre] = chave;
+    vertice->lista[vertice->livre] = inicializaVerticeB(chave);
     vertice->listaIndices[vertice->livre] = 0; //Temporiariamente preenche para achar o proximo livre
     vertice->listaIndices[vertice->livre] = encontraProximoVazio(vertice->listaIndices,N);
     vertice->ultimo = vertice->livre;
@@ -111,8 +112,8 @@ int adicionarArestaGrafoB(GrafoB* grafo, int chaveA, int chaveB){
     if(indiceA == -1) { return -1;}
     if(indiceB == -1) { return -1;}
 
-    adicionarVerticeVerticeB(grafo->listaVertices[indiceA],grafo->listaVertices[indiceB]);
-    adicionarVerticeVerticeB(grafo->listaVertices[indiceB],grafo->listaVertices[indiceA]);
+    adicionarVerticeVerticeB(grafo->listaVertices[indiceA],grafo->listaVertices[indiceB]->chave);
+    adicionarVerticeVerticeB(grafo->listaVertices[indiceB],grafo->listaVertices[indiceA]->chave);
     return 1;
 }
 
@@ -196,7 +197,7 @@ void removerTodasArestasB(GrafoB* grafo){
     while(chave != -1 ){
         int primeiro = grafo->listaVertices[chave]->primeiro;
         while(grafo->listaVertices[chave]->ultimo != -1){
-
+            printf("Removendo a aresta %d %d\n",grafo->listaVertices[chave]->chave,grafo->listaVertices[chave]->lista[primeiro]->chave);
             removerArestaGrafoB(grafo,grafo->listaVertices[chave]->chave,grafo->listaVertices[chave]->lista[primeiro]->chave);
             primeiro = grafo->listaVertices[chave]->primeiro;
         }
@@ -220,7 +221,7 @@ GrafoB* inicializaGrafoBArquivo(char *filename){
             if (feof(arquivo)) { break;}
         }
 
-        imprimeGrafoB(grafo);
+        //imprimeGrafoB(grafo);
         return grafo;
     } else {
         printf("Erro ao ler o arquivo! %s",filename);

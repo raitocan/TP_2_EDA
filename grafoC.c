@@ -216,7 +216,6 @@ void removerTodasArestasC(GrafoC* grafo){
         while(grafo->listaVertices[chave]->ultimo != -1){
             printf("Removendo aresta %d %d\n",grafo->listaVertices[chave]->chave,grafo->listaVertices[chave]->lista[primeiro]->chave);
             removerArestaGrafoC(grafo,grafo->listaVertices[chave]->chave,grafo->listaVertices[chave]->lista[primeiro]->chave);
-            printf("Passou!\n");
             primeiro = grafo->listaVertices[chave]->primeiro;
         }
         chave = grafo->listaIndicesProx[chave];
