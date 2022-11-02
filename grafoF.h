@@ -41,6 +41,10 @@ int removerArestaF(GrafoF* grafo,int chaveA,int chaveB);
 void removerVerticeF(GrafoF* grafo,int chaveA);
 
 int removerTodasArestasF(GrafoF* grafo);
-GrafoF* inicializaGrafoFArquivo(char *filename);
+GrafoF* inicializaGrafoFArquivo(char *filename,int num);
+
+int verificaEuleriano(GrafoF* grafo);
+int geraCaminhoEuleriano(GrafoF* grafo);
+int verificaTodosVertices(int* vetor, int n);
 
 #endif //TP_2_EDA_GRAFOF_H

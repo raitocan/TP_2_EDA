@@ -113,6 +113,7 @@ void imprimeVerticeF(VerticeF* vertice){
 }
 
 int removerArestaF(GrafoF* grafo,int chaveA,int chaveB){
+    //printf("Removendo aresta %d %d\n",chaveA,chaveB);
     int numOP = 0;
     if(grafo->inicio == NULL) { return 0;}
     numOP++;
@@ -121,7 +122,7 @@ int removerArestaF(GrafoF* grafo,int chaveA,int chaveB){
     while (ponteiroB->chave != chaveB) {ponteiroB = ponteiroB->proximo; numOP++;}
     ArestaF *percorrer = ponteiroA->arestaInicio;
 
-    while(percorrer->chave != chaveB) {percorrer = percorrer->proximo; numOP++;}
+    while(percorrer->chave != chaveB) {percorrer = percorrer->proximo;}
     numOP++;
     if(percorrer->anterior == NULL){
         ponteiroA->arestaInicio = percorrer->proximo;
@@ -201,9 +202,9 @@ int removerTodasArestasF(GrafoF* grafo){
     return numOp;
 }
 
-GrafoF* inicializaGrafoFArquivo(char *filename){
+GrafoF* inicializaGrafoFArquivo(char *filename,int num){
     GrafoF* grafo = inicializaGrafoF();
-    for(int i = 0;i<50;i++){
+    for(int i = 0;i<num;i++){
         adicionaVerticeGrafoF(grafo,i);
     }
     FILE *arquivo = fopen(filename,"r");
@@ -212,15 +213,39 @@ GrafoF* inicializaGrafoFArquivo(char *filename){
         char check;
         while (fscanf(arquivo, "%d%c", &num,&check)){
             //printf("LEU UM VALOR %d %d %c\n",i,num,check);
-            adicionarArestaGrafoF(grafo,i,num);
+            if(num > i){ //Para evitar arestas duplicadas
+                adicionarArestaGrafoF(grafo,i,num);
+            }
             if (check == '\n') {i++;}
             if (feof(arquivo)) { break;}
         }
 
-        imprimeGrafoF(grafo);
+        //imprimeGrafoF(grafo);
         return grafo;
     } else {
         printf("Erro ao ler o arquivo! %s",filename);
         return NULL;
     }
+}
+
+int verificaEuleriano(GrafoF* grafo){
+    int numVerticesImpar = 0;
+
+    for (VerticeF* percorrer = grafo->inicio;percorrer != NULL;percorrer = percorrer->proximo){
+        int numArestas = 0;
+        for(ArestaF* aresta = percorrer->arestaInicio; aresta != NULL;aresta = aresta->proximo){
+           numArestas++;
+        }
+        if(numArestas == 0){
+            // Grafo desconexo;
+            return 0;
+        }
+        else if(numArestas%2 != 0){
+            numVerticesImpar+=1;
+        }
+    }
+
+    if(numVerticesImpar == 0) return 1;
+    else if (numVerticesImpar == 2) return 2; //Semi-euleriano
+    else return 0;
 }

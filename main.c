@@ -4,11 +4,11 @@
 #include "grafoD.h"
 #include "grafoE.h"
 #include "grafoF.h"
-
+#include "circuitoEuleriano.h"
 
 
 int main() {
-    int qualTeste = 0,arquivo = 1,numOp = 0;
+    int qualTeste = 2,arquivo = 1,numOp = 0;
     if(qualTeste == 0){
         if(arquivo == 0 ){
             GrafoA* grafo = iniciaGrafo(50);
@@ -26,8 +26,10 @@ int main() {
             removerTodasArestasA(grafo);
             imprimirGrafo(grafo);
         } else {
-            GrafoA *grafoA = inicializaGrafoAArquivo("../graph.txt");
-            numOp += removerTodasArestasA(grafoA);
+            GrafoA *grafoA = inicializaGrafoAArquivo("../graph100.txt",100);
+            //numOp += removerTodasArestasA(grafoA);
+
+            numOp+= geraCaminhoEulerianoA(grafoA);
             imprimirGrafo(grafoA);
         }
     }
@@ -53,9 +55,16 @@ int main() {
             removerTodasArestasB(grafoB);
             imprimeGrafoB(grafoB);
         } else {
-            GrafoB *grafoB = inicializaGrafoBArquivo("../graph.txt");
-            numOp+= removerTodasArestasB(grafoB);
-            imprimeGrafoB(grafoB);
+            GrafoB *grafoB = inicializaGrafoBArquivo("../graph5.txt",5);// Mudar o TamMax TAMBÉM
+
+            //numOp+= removerTodasArestasB(grafoB);
+            //imprimeGrafoB(grafoB);
+            //printf("Teste: %d\n",grafoB->primeiro);
+
+            numOp+= geraCaminhoEulerianoB(grafoB);
+            //imprimeVerticeB(grafoB->listaVertices[grafoB->listaIndices[grafoB->primeiro]]);
+
+
         }
 
     }
@@ -77,10 +86,12 @@ int main() {
             removerTodasArestasC(grafoC);
             imprimeGrafoC(grafoC);
         } else {
-            GrafoC *grafoC = inicializaGrafoCArquivo("../graph.txt");
+            GrafoC *grafoC = inicializaGrafoCArquivo("../graph100.txt",100);
             //removerArestaGrafoC(grafoC,41,43);
-            numOp+= removerTodasArestasC(grafoC);
+            //numOp+= removerTodasArestasC(grafoC);
             imprimeGrafoC(grafoC);
+            numOp+= geraCaminhoEulerianoC(grafoC);
+
         }
     }
     if(qualTeste == 3){
@@ -102,10 +113,13 @@ int main() {
             removerTodasArestasD(grafoD);
             imprimeGrafoD(grafoD);
         } else {
-            GrafoD *grafoD = inicializaGrafoDArquivo("../graph.txt");
-            numOp+= removerTodasArestasD(grafoD);
-            imprimeGrafoD(grafoD);
-    }
+            GrafoD *grafoD = inicializaGrafoDArquivo("../graph100.txt",100);
+            //numOp+= removerTodasArestasD(grafoD);
+            //imprimeGrafoD(grafoD);
+
+            numOp += geraCaminhoEulerianoD(grafoD);
+
+        }
 
     }
     if(qualTeste == 4){
@@ -127,9 +141,13 @@ int main() {
             removerTodasArestasE(grafoE);
             imprimeGrafoE(grafoE);
         } else {
-            GrafoE *grafoE = inicializaGrafoEArquivo("../graph.txt");
-            numOp += removerTodasArestasE(grafoE);
+            GrafoE *grafoE = inicializaGrafoEArquivo("../graph100.txt",100);
+            //numOp += removerTodasArestasE(grafoE);
+            //imprimeGrafoE(grafoE);
+
+            numOp += geraCaminhoEulerianoE(grafoE);
             imprimeGrafoE(grafoE);
+
         }
     }
     if(qualTeste == 5){
@@ -151,9 +169,15 @@ int main() {
             removerTodasArestasF(grafoF);
             imprimeGrafoF(grafoF);
         } else {
-            GrafoF *grafoF = inicializaGrafoFArquivo("../graph.txt");
-            numOp += removerTodasArestasF(grafoF);
+            GrafoF *grafoF = inicializaGrafoFArquivo("../graph5.txt",5);
+            //numOp += removerTodasArestasF(grafoF);
             imprimeGrafoF(grafoF);
+            //printf("%d\n", verificaEuleriano(grafoF));
+
+            //eraCircuitoF(grafoF,grafoF->inicio);
+            numOp += geraCaminhoEulerianoF(grafoF);
+            //imprimeGrafoF(grafoF);
+
         }
 
     }

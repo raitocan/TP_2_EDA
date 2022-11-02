@@ -4,7 +4,7 @@
 
 #ifndef TP_2_EDA_GRAFOA_H
 #define TP_2_EDA_GRAFOA_H
-#define N 50
+#define N 100
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -26,7 +26,9 @@ void imprimirGrafo(GrafoA* grafo);
 int removerAresta(GrafoA* grafo,int origem,int destino);
 void removerVertice(GrafoA* grafo, int vertice);
 int removerTodasArestasA(GrafoA* grafo);
-GrafoA* inicializaGrafoAArquivo(char *filename);
+GrafoA* inicializaGrafoAArquivo(char *filename,int numLinhas);
+int verificaEulerianoA(GrafoA* grafo);
+
 
 
 
